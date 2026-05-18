@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="login-page">
+    <div class="auth-box">
+      <div class="auth-title">STARZONE</div>
+      <div class="auth-sub">Login Dashboard Admin</div>
+      <div id="loginError" class="alert alert-error" style="display:none"></div>
+      <label>Username</label>
+      <input type="text" id="username" placeholder="admin">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="••••••">
+      <button class="btn btn-block" onclick="loginAdmin()">Login</button>
+      <a href="index.html" class="back-link">← Kembali ke Website</a>
+    </div>
+  </section>
+
+  <script>
+    function loginAdmin(){
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const error = document.getElementById("loginError");
+
+      if(username === "admin" && password === "121212"){
+        localStorage.setItem("adminLogin", "true");
+        window.location.href = "admin.html";
+      }else{
+        error.textContent = "Username atau password salah!";
+        error.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>

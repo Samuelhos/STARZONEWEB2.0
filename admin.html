@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin StarZone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app admin-page">
+    <nav class="navbar">
+      <a class="logo" href="index.html"><span>STAR<span>ZONE</span></span></a>
+      <div class="nav-links">
+        <a href="index.html">Lihat Website</a>
+        <button class="btn btn-pink" onclick="logoutAdmin()">Logout</button>
+      </div>
+    </nav>
+
+    <section class="admin-wrap">
+      <div class="admin-header">
+        <h1>Dashboard Admin</h1>
+        <p>Edit media, promo, game YouTube, testimoni, dan jadwal. Semua perubahan realtime ke website.</p>
+        <div class="admin-quick-guide">
+          <span>1. Update harga/status</span>
+          <span>2. Atur preview game</span>
+          <span>3. Simpan realtime</span>
+        </div>
+      </div>
+
+      <div class="admin-grid-main">
+        <div class="card admin-card-panel">
+          <h2>Edit Website</h2>
+          <label>Nomor WhatsApp Admin</label>
+          <input type="text" id="whatsappNumber" placeholder="Contoh: 6287811030777">
+
+          <label>Upload Logo</label>
+          <input type="file" id="logoInput" accept="image/*">
+
+          <label>Upload Gambar Nintendo</label>
+          <input type="file" id="nintendoImage" accept="image/*">
+
+          <label>Upload Gambar Playbox</label>
+          <input type="file" id="playboxImage" accept="image/*">
+
+          <label>Harga Nintendo</label>
+          <input type="text" id="nintendoPrice" placeholder="Contoh: 80.000">
+
+          <label>Harga Playbox</label>
+          <input type="text" id="playboxPrice" placeholder="Contoh: 70.000">
+
+          <label>Badge Nintendo</label>
+          <input type="text" id="nintendoBadge" placeholder="READY / HOT / PROMO">
+
+          <label>Badge Playbox</label>
+          <input type="text" id="playboxBadge" placeholder="READY / BEST SELLER">
+        </div>
+
+        <div class="card admin-card-panel">
+          <h2>Promo & Info</h2>
+          <label>Judul Promo</label>
+          <input type="text" id="promoTitle" placeholder="Contoh: Promo Weekend">
+
+          <label>Isi Promo</label>
+          <textarea id="promoBody" placeholder="Contoh: Sewa 2 hari gratis tambah 1 jam"></textarea>
+
+          <label>Running Text</label>
+          <textarea id="runningText" placeholder="Pisahkan dengan tanda | contoh: READY HARI INI | BOOKING VIA WHATSAPP | PROMO WEEKEND"></textarea>
+
+          <label>Status Toko</label>
+          <select id="storeStatus">
+            <option value="open">OPEN</option>
+            <option value="closed">TUTUP</option>
+          </select>
+
+          <label>Jam / Catatan Status</label>
+          <input type="text" id="storeHours" placeholder="Contoh: Buka sampai 22:00">
+        </div>
+
+
+        <div class="card admin-card-panel game-preview-admin-card">
+          <h2>Preview Game YouTube</h2>
+          <p class="admin-small-text">Atur game yang tampil di halaman Preview Game. Bisa tambah atau hapus game sesuai kebutuhan. Isi nama game dan link YouTube, lalu klik Simpan Semua Perubahan.</p>
+
+          <div class="game-admin-list" id="gameAdminList">
+            <p class="empty-text">Memuat daftar game...</p>
+          </div>
+
+          <div class="game-admin-actions clean-actions">
+            <button class="btn btn-green" type="button" onclick="addGamePreviewRow()">Tambah Game</button>
+            <button class="btn" type="button" onclick="openGamePreviewPage()">Buka Preview Game</button>
+            <button class="btn btn-pink" type="button" onclick="fillDefaultGamePreviews()">Isi Contoh Game</button>
+          </div>
+        </div>
+
+        <div class="card admin-card-panel">
+          <h2>Galeri Website</h2>
+          <p class="admin-small-text">Upload foto unit atau dokumentasi rental. Testimoni sekarang otomatis dari halaman review customer.</p>
+
+          <label>Galeri Foto 1</label>
+          <input type="file" id="galleryInput1" accept="image/*">
+          <label>Galeri Foto 2</label>
+          <input type="file" id="galleryInput2" accept="image/*">
+          <label>Galeri Foto 3</label>
+          <input type="file" id="galleryInput3" accept="image/*">
+          <label>Galeri Foto 4</label>
+          <input type="file" id="galleryInput4" accept="image/*">
+
+          <button class="wa-btn" onclick="saveWebsiteData()">Simpan Semua Perubahan</button>
+        </div>
+
+        <div class="card admin-card-panel faq-terms-admin-card">
+          <h2>FAQ & Ketentuan</h2>
+          <p class="admin-small-text">Edit pertanyaan umum dan syarat rental yang tampil di homepage. Kosongkan FAQ yang tidak ingin ditampilkan.</p>
+
+          <div class="faq-admin-grid">
+            <div class="faq-admin-item">
+              <label>FAQ 1 - Pertanyaan</label>
+              <input type="text" id="faqQuestion1" placeholder="Contoh: Apakah bisa antar jemput?">
+              <label>FAQ 1 - Jawaban</label>
+              <textarea id="faqAnswer1" placeholder="Tulis jawaban FAQ 1"></textarea>
+            </div>
+
+            <div class="faq-admin-item">
+              <label>FAQ 2 - Pertanyaan</label>
+              <input type="text" id="faqQuestion2" placeholder="Contoh: Booking valid kapan?">
+              <label>FAQ 2 - Jawaban</label>
+              <textarea id="faqAnswer2" placeholder="Tulis jawaban FAQ 2"></textarea>
+            </div>
+
+            <div class="faq-admin-item">
+              <label>FAQ 3 - Pertanyaan</label>
+              <input type="text" id="faqQuestion3" placeholder="Contoh: Apakah jadwal realtime?">
+              <label>FAQ 3 - Jawaban</label>
+              <textarea id="faqAnswer3" placeholder="Tulis jawaban FAQ 3"></textarea>
+            </div>
+
+            <div class="faq-admin-item">
+              <label>FAQ 4 - Pertanyaan</label>
+              <input type="text" id="faqQuestion4" placeholder="Contoh: Kalau ingin tanya dulu?">
+              <label>FAQ 4 - Jawaban</label>
+              <textarea id="faqAnswer4" placeholder="Tulis jawaban FAQ 4"></textarea>
+            </div>
+          </div>
+
+          <label>Syarat & Ketentuan</label>
+          <textarea id="termsText" class="terms-admin-textarea" placeholder="Tulis satu ketentuan per baris"></textarea>
+
+          <button class="wa-btn" onclick="saveWebsiteData()">Simpan FAQ & Ketentuan</button>
+        </div>
+
+        <div class="card admin-card-panel review-tools-card">
+          <h2>Review Customer</h2>
+          <p class="admin-small-text">Setelah customer selesai sewa, admin bisa buka halaman review dari sini. Review customer akan langsung tampil realtime di website. Admin tetap bisa sembunyikan, tampilkan lagi, atau hapus review.</p>
+
+          <div class="review-action-grid single-action">
+            <button class="btn btn-cyan" type="button" onclick="openReviewPage()">Buka Halaman Review</button>
+          </div>
+
+          <h2 style="margin-top:28px">Review Masuk</h2>
+          <div id="adminReviewList" class="admin-review-list">
+            <p class="empty-text">Belum ada review masuk.</p>
+          </div>
+        </div>
+
+
+        <div class="card admin-card-panel booking-requests-card">
+          <h2>Riwayat Booking Masuk</h2>
+          <p class="admin-small-text">Setiap customer klik Booking Sekarang, data akan tersimpan di sini dan tetap masuk ke WhatsApp admin.</p>
+          <div id="adminBookingList" class="admin-booking-list">
+            <p class="empty-text">Belum ada booking masuk.</p>
+          </div>
+        </div>
+
+        <div class="card schedule admin-schedule-box">
+          <h2>Kelola Jadwal</h2>
+          <div class="schedule-filter-tabs">
+            <button class="btn active" type="button" data-schedule-filter="all" onclick="setScheduleFilter('all')">Semua</button>
+            <button class="btn btn-green" type="button" data-schedule-filter="ready" onclick="setScheduleFilter('ready')">Ready</button>
+            <button class="btn btn-pink" type="button" data-schedule-filter="booked" onclick="setScheduleFilter('booked')">Booked</button>
+            <button class="btn btn-cyan" type="button" data-schedule-filter="today" onclick="setScheduleFilter('today')">Hari Ini</button>
+            <button class="btn" type="button" data-schedule-filter="week" onclick="setScheduleFilter('week')">Minggu Ini</button>
+          </div>
+          <div id="adminScheduleList"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    if(localStorage.getItem("adminLogin") !== "true"){
+      window.location.href = "login.html";
+    }
+    function logoutAdmin(){
+      localStorage.removeItem("adminLogin");
+      window.location.href = "login.html";
+    }
+  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvzqJC6kSsSC27m7AcOvrfQ9_44hms6TQ",
+      authDomain: "stargamerental.firebaseapp.com",
+      databaseURL: "https://stargamerental-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "stargamerental",
+      storageBucket: "stargamerental.firebasestorage.app",
+      messagingSenderId: "576904982238",
+      appId: "1:576904982238:web:b7717c5ccba5f52596dc4f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    window.db = getDatabase(app);
+    window.ref = ref;
+    window.set = set;
+    window.get = get;
+    window.onValue = onValue;
+    window.update = update;
+    window.dispatchEvent(new Event("firebase-ready"));
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
